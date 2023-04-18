@@ -5,11 +5,12 @@ import Contact from "./pages/Contact";
 import Policy from "./pages/Policy";
 import NotFound from "./pages/NotFound";
 import Register from "./pages/Auth/Register";
-import 'react-toastify/dist/ReactToastify.css';
+
 import  { Toaster } from 'react-hot-toast';
 import Login from "./pages/Auth/Login";
 import Dashboard from "./pages/user/Dashboard";
 import PrivateRoute from "./components/routes/Private";
+
 
 
 function App() {
@@ -18,13 +19,10 @@ function App() {
       <Toaster />
       <Routes>
         <Route path="/" element={<HomePage/>}/>
-        <Route
-         path="/dashboard"
-          element={
-          <PrivateRoute><Dashboard/> </PrivateRoute>}/>
-       
-          
-     
+        <Route path="/" element={<PrivateRoute/>}>
+           <Route path="/dashboard" element={<Dashboard/>}/>
+        </Route>
+      
         <Route path="/register" element={<Register/>}/>
         <Route path="/login" element={<Login/>}/>
         <Route path="/about" element={<AboutPage/>}/>
