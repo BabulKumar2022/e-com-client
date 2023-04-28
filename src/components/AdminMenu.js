@@ -1,7 +1,7 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
 
-const AdminMenu = () => {
+const AdminMenu = (props) => {
   return (
     <>
       <div className="text-center">

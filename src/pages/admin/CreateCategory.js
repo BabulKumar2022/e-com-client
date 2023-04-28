@@ -59,8 +59,8 @@ const CreateCategory = () => {
       if(data.success){
         toast.success(`${updatedName} is updated`)
         setSelected(null);
-        setUpdatedName("");
         setVisible(false);
+        setUpdatedName("");
         getAllCategory();
       }else{
         toast.error(data.message)
@@ -75,14 +75,14 @@ const CreateCategory = () => {
   };
 
   // Delete category
-  const handleDelete = async(pId)=>{
+  const handleDelete = async(id)=>{
  
     try {
       const {data} = await axios.delete(
-        `http://localhost:8000/api/v1/category/delete-category/${pId}`)
+        `http://localhost:8000/api/v1/category/delete-category/${id}`)
       if(data.success){
-        toast.success(`${name} is Deleted`)
-        
+        toast.success(`category is Deleted`)
+        getAllCategory();
       }else{
         toast.error(data.message)
       }

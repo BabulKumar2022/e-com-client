@@ -3,7 +3,7 @@ import Layout from '../../components/Layout'
 import AdminMenu from '../../components/AdminMenu'
 import axios from 'axios';
 import { toast } from 'react-hot-toast';
-import { Input, Select, message } from 'antd';
+import { Select } from 'antd';
 import { useNavigate } from 'react-router-dom';
 
 
@@ -11,7 +11,7 @@ const {Option} = Select;
 
 const CreateProduct = () => {
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const [categories, setCategories] = useState([]);
   const [name, setName] = useState(" ")
@@ -45,7 +45,7 @@ const CreateProduct = () => {
   //===========create product handle=====================
 
   const handleCreate = async(e)=>{
- 
+    navigate("/dashboard/admin/product")
     e.preventDefault();
     try {
       const productData = new FormData()
@@ -55,12 +55,12 @@ const CreateProduct = () => {
       productData.append("quantity", quantity)
       productData.append("category", category)
       productData.append("photo", photo)
-      const {data} = axios.post('http://localhost:8000/api/v1/product/create-product', productData)
+      const {data} = await axios.post('http://localhost:8000/api/v1/product/create-product', productData)
+    
       if(data?.success){
         toast.success("Product created successfully")
-        navigate("/dashboard/admin/product")
       }else{
-        toast.error(data?.message)
+        toast.error("something went wrong")
       }
     } catch (error) {
       console.log(error)
@@ -91,16 +91,18 @@ const CreateProduct = () => {
                     </Select>
                     <div className="mb-3">
                         <p>Upload Picture</p>
-                      <button className='btn btn-outline-success col-md-12'>
-                          {photo ? photo.name : "Upload Photo"}  
+                      <label className='btn btn-outline-success col-md-12'>
+                      {photo ? photo.name  : "Upload Photo"}  
                           <input
                            type="file"
                            name="photo"
-                           accept='image/*'
-                           onChange={(e) => setPhoto(e.target.files[0])} hidden/>
-                      </button>
+                           accept="image/*"
+                           onChange={(e) => setPhoto(e.target.files[0])} 
+                           hidden/>
+                      </label>
                     </div>
                     <div className="mb-3">
+                     
                       {/* {
                         photo && (
                           <div className="text-center">

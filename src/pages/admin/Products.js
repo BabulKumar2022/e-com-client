@@ -32,20 +32,20 @@ const Products = () => {
                 <div className="col-md-3"><AdminMenu/></div>
                 <div className="col-md-9 ">
                     <h1 className='text-center'>All Products List </h1>
-                    <div className="d-flex">
-                    {
-                        products.map(product =>(
-                            <Link key={product._id} to={`/dashboard/admin/product/${product.slug}`} className='product-link'>
-                                <div className="card m-2" style={{width: "18rem"}}>
-                                <img src={`http://localhost:8000/api/v1/product/product-photo/${product._id}`} className="card-img-top" alt=''/>
-                                <div class="card-body">
-                                    <h5 className="card-title">{product.name}</h5>
-                                    <p className="card-text">{product.description}</p>
+                    <div className="row  row-cols-3  ">
+                        {
+                            products.map(product =>(
+                                <Link key={product._id} to={`/dashboard/admin/product/${product.slug}`} className='product-link'>
+                                    <div className="card m-2" style={{width: "18rem"}}>
+                                    <img src={`http://localhost:8000/api/v1/product/product-photo/${product._id}`} className="card-img-top" alt=''/>
+                                    <div class="card-body">
+                                        <h5 className="card-title">{product.name}</h5>
+                                        <p className="card-text">{product.description}</p>
+                                    </div>
                                 </div>
-                            </div>
-                            </Link>
-                        ))
-                    }
+                                </Link>
+                            ))
+                        }
                     </div>
                 </div>
             </div>
