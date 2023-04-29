@@ -19,6 +19,8 @@ import Profile from "./pages/user/Profile";
 import Order from "./pages/user/Order";
 import Products from "./pages/admin/Products";
 import UpdateProduct from "./pages/admin/UpdateProduct";
+import SearchPage from "./pages/SearchPage";
+import ProductDetails from "./pages/ProductDetails";
 
 
 
@@ -28,6 +30,8 @@ function App() {
       <Toaster />
       <Routes>
         <Route path="/" element={<HomePage/>}/>
+        <Route path="/product/:slug" element={<ProductDetails/>}/>
+        <Route path="/search" element={<SearchPage/>}/>
         <Route path="/dashboard" element={<PrivateRoute/>}>
            <Route path="user" element={<Dashboard/>}/>
            <Route path="user/profile" element={<Profile/>}/>

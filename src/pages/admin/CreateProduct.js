@@ -45,7 +45,7 @@ const CreateProduct = () => {
   //===========create product handle=====================
 
   const handleCreate = async(e)=>{
-    navigate("/dashboard/admin/product")
+    navigate("/dashboard/admin/products")
     e.preventDefault();
     try {
       const productData = new FormData()
@@ -55,6 +55,8 @@ const CreateProduct = () => {
       productData.append("quantity", quantity)
       productData.append("category", category)
       productData.append("photo", photo)
+
+      
       const {data} = await axios.post('http://localhost:8000/api/v1/product/create-product', productData)
     
       if(data?.success){
