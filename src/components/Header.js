@@ -4,10 +4,11 @@ import {GiShoppingBag} from 'react-icons/gi'
 import { useAuth } from '../context/auth';
 import { toast } from 'react-hot-toast';
 import SearchInput from './Form/SearchInput';
+import useCategory from './hooks/useCategory';
 
 const Header = () => {
     const [auth, setAuth] = useAuth();
-
+    const categories = useCategory()
     const handleLogout = () =>{
         setAuth({
             ...auth,
@@ -31,8 +32,25 @@ const Header = () => {
                     <li className="nav-item">
                     <NavLink to='/' className="nav-link mx-2 " >Home</NavLink>
                     </li>
-                    <li className="nav-item">
+                    {/* <li className="nav-item">
                         <NavLink to='/category' className="nav-link " >Category</NavLink>
+                    </li> */}
+                    <li class="nav-item dropdown">
+                         <Link class="nav-link dropdown-toggle" to={"/categories"}  id="navbarDropdown" data-bs-toggle="dropdown" >
+                            Category
+                        </Link>
+                        <ul className="dropdown-menu" >
+                            <li>
+                                <Link className="dropdown-item" to={"/categories"}>All Categories</Link>
+                            </li>
+                            {
+                                categories?.map(c =>(
+                                <li>
+                                    <Link className="dropdown-item" to={`/category/${c.slug}`}>{c.name}</Link>
+                                </li>
+                                ))
+                            }
+                        </ul>
                     </li>
                    
                   {

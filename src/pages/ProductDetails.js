@@ -18,7 +18,7 @@ const [relatedProducts, setRelatedProducts] = useState([])
       try {
         const {data}= await axios.get(`http://localhost:8000/api/v1/product/get-product/${params.slug}`)
         setProduct(data?.product);
-        getSimilarProduct(data?.product._id, data?.product.category)
+        getSimilarProduct(data?.product._id, data?.product.category._id)
       } catch (error) {
         console.log(error) 
       }

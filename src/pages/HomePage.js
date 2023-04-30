@@ -145,7 +145,7 @@ const filterProduct = async()=>{
               </div>
           </div>
         <div className="col-md-10 ">
-          {JSON.stringify(radio,null,4)}
+          {/* {JSON.stringify(radio,null,4)} */}
           <h1 className="text-center">All Products :{products.length}</h1>
             <div className="d-flex flex-wrap">
               {
