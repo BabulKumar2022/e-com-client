@@ -5,10 +5,13 @@ import { useAuth } from '../context/auth';
 import { toast } from 'react-hot-toast';
 import SearchInput from './Form/SearchInput';
 import useCategory from './hooks/useCategory';
+import { useCart } from '../context/cart';
+import { Badge } from 'antd';
 
 const Header = () => {
     const [auth, setAuth] = useAuth();
     const categories = useCategory()
+    const [cart]=useCart()
     const handleLogout = () =>{
         setAuth({
             ...auth,
@@ -22,10 +25,10 @@ const Header = () => {
     <>
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
         <div className="container-fluid">
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+            <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
                 <span className="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+            <div className="collapse navbar-collapse" id="navbarTogglerDemo01">
                 <Link to='/' className="navbar-brand" href="#"><GiShoppingBag/> ONLINE SHOP</Link>
                 <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
                     <SearchInput/>
@@ -35,8 +38,8 @@ const Header = () => {
                     {/* <li className="nav-item">
                         <NavLink to='/category' className="nav-link " >Category</NavLink>
                     </li> */}
-                    <li class="nav-item dropdown">
-                         <Link class="nav-link dropdown-toggle" to={"/categories"}  id="navbarDropdown" data-bs-toggle="dropdown" >
+                    <li className="nav-item dropdown">
+                         <Link className="nav-link dropdown-toggle" to={"/categories"}  id="navbarDropdown" data-bs-toggle="dropdown" >
                             Category
                         </Link>
                         <ul className="dropdown-menu" >
@@ -45,7 +48,7 @@ const Header = () => {
                             </li>
                             {
                                 categories?.map(c =>(
-                                <li>
+                                <li key={c._id}>
                                     <Link className="dropdown-item" to={`/category/${c.slug}`}>{c.name}</Link>
                                 </li>
                                 ))
@@ -63,7 +66,7 @@ const Header = () => {
                         <NavLink to='/login' className="nav-link" href="#">Login</NavLink>
                         </li>
                     </>) : (<>
-                        <li class="nav-item dropdown">
+                        <li className="nav-item dropdown">
                             <NavLink class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             {auth?.user.name}
                             </NavLink>
@@ -76,7 +79,10 @@ const Header = () => {
                     </>)
                   }
                     <li className="nav-item">
-                    <NavLink to='/cart' className="nav-link" href="#">Cart (0)</NavLink>
+                        <Badge count={cart?.length} showZero>
+                            <NavLink to='/cart' className="nav-link mx-2" href="#">cart</NavLink>
+                        </Badge>
+                    
                     </li>
                 </ul>
             </div>

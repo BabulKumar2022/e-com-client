@@ -2,9 +2,12 @@ import React, { useEffect, useState } from 'react'
 import Layout from '../components/Layout'
 import { useParams } from 'react-router-dom'
 import axios from 'axios';
+import { useCart } from '../context/cart';
+import {   toast } from 'react-hot-toast';
 
 const ProductDetails = () => {
 const params = useParams();
+const [cart, setCart] = useCart()
 const [product, setProduct] = useState({});
 const [relatedProducts, setRelatedProducts] = useState([])
 
@@ -27,7 +30,7 @@ const [relatedProducts, setRelatedProducts] = useState([])
     const getSimilarProduct = async (pid, cid) =>{
       try {
         const {data} = await axios.get(`http://localhost:8000/api/v1/product/related-product/${pid}/${cid}`)
-       console.log(data)
+      //  console.log(data)
         setRelatedProducts(data?.product)
       } catch (error) {
         console.log(error)
@@ -47,7 +50,12 @@ const [relatedProducts, setRelatedProducts] = useState([])
           <h5>Description: {product.description}</h5>
           <h5>Category: {product.category}</h5>
           <h5>Price: {product.price}</h5>
-          <button  class="btn btn-secondary ms-1">Add To cart</button>
+          <button  className="btn btn-secondary ms-1"
+                               onClick={()=> {setCart([...cart, product])
+                                localStorage.setItem("cart", JSON.stringify([...cart, product]))
+                                toast.success("Item add to cart")
+                              }}
+                               >Add To cart</button>
 
           </div>
         </div>

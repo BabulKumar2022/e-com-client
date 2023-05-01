@@ -23,7 +23,7 @@ const SearchInput = () => {
         <form className="d-flex" role="search" onSubmit={handleFormSubmit}>
         <input className="form-control me-2"
             type="search"
-            placeHolder="Search"
+            placeholder="Search"
             aria-label="Search"
             value={values.keyword}
             onChange={(e) => setValues({...values, keyword: e.target.value})}

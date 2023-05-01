@@ -26,24 +26,29 @@ const Products = () => {
   return (
     <Layout title={"Product"}>
         <div className="container-fluid m-3 p-3">
-            <h1 className='text-center'>AdminDashboard </h1>  
+            <h1 className='text-center  '>AdminDashboard </h1>  
             <hr/>
             <div className="row">
                 <div className="col-md-3"><AdminMenu/></div>
                 <div className="col-md-9 ">
-                    <h1 className='text-center'>All Products List </h1>
+                    <h4 className='text-center'>All Products List </h4>
                     <div className="row  row-cols-3  ">
                         {
                             products.map(product =>(
-                                <Link key={product._id} to={`/dashboard/admin/product/${product.slug}`} className='product-link'>
-                                    <div className="card m-2" style={{width: "18rem"}}>
+                                <>
+                                <div className="card m-2" style={{width: "18rem"}}>
                                     <img src={`http://localhost:8000/api/v1/product/product-photo/${product._id}`} className="card-img-top" alt=''/>
                                     <div class="card-body">
                                         <h5 className="card-title">{product.name}</h5>
                                         <p className="card-text">{product.description}</p>
                                     </div>
+                                    <Link key={product._id} to={`/dashboard/admin/product/${product.slug}`} className='product-link'>
+                                        <button className='btn btn-primary mb-2 '>Update</button>
+                                    </Link>
                                 </div>
-                                </Link>
+                                
+                                </>
+                                    
                             ))
                         }
                     </div>

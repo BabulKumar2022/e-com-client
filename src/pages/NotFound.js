@@ -8,7 +8,7 @@ const NotFound = () => {
     <Layout title={'Page not found'}>
       <div className="pnf">
         <h1 className='pnf-title'>404</h1>
-        <h1 className='pnf-heading'>Page NotFound</h1> 
+        <h1 className='pnf-heading'>Page Not Found</h1> 
         <Link to="/" className='pnf-btn'>GO BACK</Link>
       </div>
       
