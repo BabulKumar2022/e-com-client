@@ -3,6 +3,7 @@ import Layout from '../components/Layout'
 import { useAuth } from '../context/auth'
 import { useCart } from '../context/cart';
 import { useNavigate } from 'react-router-dom';
+import CheckOut from '../components/CheckOut';
 
 
 
@@ -65,7 +66,7 @@ const totalPrice = () =>{
               <div className="col-md-8">
                 {
                   cart?.map((p) =>(
-                    <div className="row card mb-2 flex-row">
+                    <div key={p._id} className="row card mb-2 flex-row">
                       <div className="col-md-4">
                         <img src={`http://localhost:8000/api/v1/product/product-photo/${p._id}`}
                       className="card-img-top m-2" height={"80%"}  alt=''/>
@@ -86,6 +87,7 @@ const totalPrice = () =>{
                <p>Total | Checkout</p>
                <hr />
                <h5>Total : {totalPrice()}</h5>
+               <CheckOut totalPrice={totalPrice()} />
                {
                 auth?.user?.address ? (
                   <>
